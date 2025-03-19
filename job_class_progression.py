@@ -46,14 +46,13 @@ class Senior_Job():
 class Job():
   def __init__(self):
     self.salary = 26000 #default salary for someone starting level in a job without a degree
-    self.experience_required = 20 
-    create_job(self,'')
+    self.experience_required = 20 # sets minimum expreience required
+    create_job(self,'') #creates the job
     if self.education[0] != None:
       self.salary = random.randint(35000,40000)# sets random salary of the job
-      self.skill_required = random.randint(20,60)
         
   def promote(self,player):
-    if player.age> self.promote_asked:
+    if player.age> self.promote_asked: 
 
       if self.work_ethic>60:
         
@@ -64,7 +63,7 @@ class Job():
           self.title=self.title.replace('Junior ','')
           self.title=self.title.replace('Apprentice ','')
           self.promote_asked= player.age
-          return f'You were promoted to a {self.title}'
+          return f'You were promoted to a {self.title}' # appends to the history
         
         elif 'Senior' or 'Expert' in self.title:
           self.salary += random.randint(5000,13000)
@@ -77,18 +76,18 @@ class Job():
           if self.education[0]== None:
             self.title='Expert ' + self.title
             self.promote_asked= player.age
-            return f'You were promoted to a {self.title}'
+            return f'You were promoted to a {self.title}'# appends to the history
           
           else:
              self.title='Senior ' + self.title
             self.promote_asked= player.age
-             return f'You were promoted to a {self.title}'
+             return f'You were promoted to a {self.title}' # appends to the history
       else:
         self.promote_asked= player.age
-        return f'You don\'t quailfy for a promotion'
+        return f'You don\'t quailfy for a promotion' # appends to the history
       
     else:
-       return ''
+       return '' #fail safe incase the button is clicked multiple times. if there is nothing to append to history the game will crash
 
   def work(self,player):
     if player.age>   self.work_asked:
@@ -98,12 +97,12 @@ class Job():
       player.experience = check_values((player.experience+random.randint(1,7)),100,0)
       player.health+= check_values(player.health+(self.work_life_balance*random.randint(-5,0))),100,0
       self.work_asked= player.age
-      return f'Your boss noticed you hard at work'
+      return f'Your boss noticed you hard at work' # appends to the history
     else:
-      return ''
+      return '' #fail safe incase the button is clicked multiple times. if there is nothing to append to history the game will crash
     
   def quit_job(self,player):
-    text = f'You quit working as a {self.title} at {self.work_place}'
+    text = f'You quit working as a {self.title} at {self.work_place}' # appends to the history
     player.job= None
     return text
     
@@ -112,51 +111,50 @@ class Job():
       if (player.education in self.education):
         if player.experience >=self.experience_required:
           if player.job is not None:
-            text = f'You quit working at {player.job.work_place} to work as a {self.title} at {self.work_place}'
+            text = f'You quit working at {player.job.work_place} to work as a {self.title} at {self.work_place}'# appends to the history
             player.job= self
             self.apply_asked = True
-            return text
+            return text 
           else:
             player.job= self
             self.apply_asked = True
-            return f'You got the {self.title} job at {self.work_place}'
+            return f'You got the {self.title} job at {self.work_place}' # appends to the history
       else:
         self.apply_asked = True
-        return f'You did not get the {self.title} job'
+        return f'You did not get the {self.title} job' # appends to the history
 
-    return ''
+    return '' #fail safe incase the button is clicked multiple times. if there is nothing to append to history the game will crash
 
 class Junior_Job(Job):
   def __init__(self):
     super().__init__()
     self.salary = 13000 #default salary for someone starting level in a job without a degree
-    self.experience_required = -1
+    self.experience_required = -1 #sets minimum expreience
     create_job(self,'Junior')
     if self.education[0] !=  None :
       self.salary = random.randint(24000,29000)# sets random salary of the job
-      self.skill_required = random.randint(0,40)
+      
       
       
 class Senior_Job(Job):
   def __init__(self):
     super().__init__()
     starting_salary = 35000 #default salary for someone starting level in a job without a degree
-    self.experience_required = 40
+    self.experience_required = 40 #sets minimum expreience
     create_job(self,'Senior')
     if self.education[0] != None :
       self.salary = random.randint(55000,80000)# sets random salary of the job
-      self.skill_required = random.randint(60,80)
+      
       
 def create_job(self,Type):
-  random_job = random_choice(Jobs_Dict) 
-  self.title=Type + ' ' + random_job[0] 
+  random_job = random_choice(Jobs_Dict) #gets a random job from the job dict
+  self.title=Type + ' ' + random_job[0] #sets the title of the job
   self.education = random_job[1:len(random_job)]# sets the education required for the job
-  self.work_ethic = random.randint(1,100)
-  self.work_place = random_choice(last_names) +' '+ random_choice(business_suffixes)
-  self.apply_asked = False
-  self.promote_asked = -1
-  self.work_asked= -1
-  self.work_hard=-1
+  self.work_ethic = random.randint(35,70) #sets the work ethic the player has in this job 
+  self.work_place = random_choice(last_names) +' '+ random_choice(business_suffixes) 
+  self.apply_asked = False # checks if the player has applied for the job
+  self.promote_asked = -1 # check when the player last asked for a promotion
+  self.work_asked= -1 # check when the player last used the work function 
   self.work_life_balance = random.randint(1,10)
   if self.education[0] == None and Type == 'Junior':
     self.title='Apprentice' + ' ' + random_job[0]

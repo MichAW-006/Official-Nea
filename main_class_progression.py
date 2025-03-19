@@ -46,7 +46,7 @@ import random
 #clunky many factors are repeated but is much more effecient as it sets itself, however attributes are irrelevant for other characters such as npcs in the game
 
 
-#final version
+#third version
 import random
 def random_choice(dict):
     random_value= random.choice(list(d.items()))
@@ -80,3 +80,50 @@ def random_choice(dict):
       self.intelligence=random.randint(0,100)
       self.life = True
   # neat and understandable. complexity is reduced by using subprograms, much much better
+
+#final version 
+
+class Main_Character():
+  def __init__(self):
+    set_values(self)
+    country_city = random_choice(Countries)
+    self.country = country_city[0]
+    self.city = country_city[1]
+    self.age = 0                    #age is automatically set to 0
+    self.health = random.randint(40,100)    # attributes are set randomly
+    self.mood = random.randint(90,100) 
+    self.money = 0
+    self.intelligence=random.randint(0,100)
+    self.life = True
+    self.grades = round(self.intelligence/0.85)
+    self.attendance = 100
+    self.experience=100
+    self.properties =[]
+    self.relationships = []
+    self.education = None                      
+    self.significant_other = None
+    self.married =False
+    self.job= None
+    self.club = None
+    self.school = None
+
+def choice_results(self,choice,choice_list):
+    if choice == 'a':
+       i=choice_list[4]
+       m=choice_list[5]
+       h=choice_list[6]
+    elif choice == 'b':
+       i=choice_list[7]
+       m=choice_list[8]
+       h=choice_list[9]
+    else:
+       i=choice_list[10]
+       m=choice_list[11]
+       h=choice_list[12]
+    self.intelligence=check_values(self.intelligence+random.randint(i[0],i[1]),100,0) 
+    self.mood=check_values(self.mood+random.randint(m[0],m[1]),100,0) 
+    self.health=check_values(self.health+random.randint(h[0],h[1]),100,0) 
+
+def check_health(self):    
+    health_check(self)
+
